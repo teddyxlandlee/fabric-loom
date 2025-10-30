@@ -132,6 +132,7 @@ public class MigrateMappingsService extends Service<MigrateMappingsService.Optio
 				MappingsNamespace.INTERMEDIARY.toString()
 		).read();
 
+		mercury.getProcessors().add(org.cadixdev.mercury.mixin.MixinRemapper.create(mappingSet));
 		mercury.getProcessors().add(MercuryRemapper.create(mappingSet));
 
 		for (File file : getOptions().getClasspath().getFiles()) {
