@@ -51,12 +51,16 @@ repositories {
 		name = 'Fabric'
 		url = 'https://maven.fabricmc.net/'
 	}
+	maven {
+		name = "Sinytra"
+		url = "https://maven.su5ed.dev/releases"
+	}
 	mavenCentral()
 }
 
 configurations.configureEach {
 	resolutionStrategy {
-		failOnNonReproducibleResolution()
+		//failOnNonReproducibleResolution()
 	}
 
 	if (canBeConsumed)  {
@@ -110,6 +114,10 @@ dependencies {
 	}
 
 	implementation libs.fabric.loom.nativelib
+
+	implementation("org.sinytra:mercury-mixin:0.2.0-SNAPSHOT:all") {
+		transitive = false
+	}
 
 	// decompilers
 	fernflowerCompileOnly runtimeLibs.fernflower
@@ -321,15 +329,16 @@ publishing {
 		}
 	}
 	repositories {
-		maven {
-			if (ENV.MAVEN_URL) {
-				url ENV.MAVEN_URL
-				credentials {
-					username ENV.MAVEN_USERNAME
-					password ENV.MAVEN_PASSWORD
-				}
-			}
-		}
+//		maven {
+//			if (ENV.MAVEN_URL) {
+//				url ENV.MAVEN_URL
+//				credentials {
+//					username ENV.MAVEN_USERNAME
+//					password ENV.MAVEN_PASSWORD
+//				}
+//			}
+//		}
+		mavenLocal()
 	}
 }
 
